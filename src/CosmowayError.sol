@@ -2,5 +2,5 @@
 pragma solidity ^0.8.0;
 
 error InvalidKeyset();
-error NotDelegator();
+error NotDelegatee();
 error ConditionNotMet();

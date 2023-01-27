@@ -44,14 +44,14 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
 
     function receiveKey(
         uint keysetId,
-        uint delegatorId,
+        uint delegateeId,
         bool accept,
         string memory reason
     ) external override {
-        if (keysets[keysetId].to[delegatorId] != msg.sender)
-            revert NotDelegator();
+        if (keysets[keysetId].to[delegateeId] != msg.sender)
+            revert NotDelegatee();
 
-        keysets[keysetId].accepted[delegatorId] = accept;
+        keysets[keysetId].accepted[delegateeId] = accept;
         emit KeysetReceived(keysetId, msg.sender, accept, reason);
     }
 
@@ -84,14 +84,14 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
 
     function submitRekey(
         uint accessId,
-        uint delegatorId,
+        uint delegateeId,
         bytes memory rekeyShard
     ) external override {
         AccessRequest storage access = accessRequests[accessId];
-        if (keysets[access.keysetId].to[delegatorId] != msg.sender)
-            revert NotDelegator();
+        if (keysets[access.keysetId].to[delegateeId] != msg.sender)
+            revert NotDelegatee();
 
-        access.rekeyShards[delegatorId] = rekeyShard;
+        access.rekeyShards[delegateeId] = rekeyShard;
         emit RekeyUploaded(accessId, access.requester, rekeyShard);
     }
 }

@@ -5,16 +5,16 @@ import "./ICosmowayProtocolConditioner.sol";
 
 /*
  * ICosmowayKeyDeliverProtocol
- *   This sub-protocol is used to delegator encrypted key to
+ *   This sub-protocol is used to delegatee encrypted key to
  *   another user. First, a content provider will generate a
  *   key pair to encrypted the content, the secret key is
- *   devided into multiple shares and sent to delegators via
- *   this protocol. The requirements of delegators might be
+ *   devided into multiple shares and sent to delegatees via
+ *   this protocol. The requirements of delegatees might be
  *   vary, hence it will be implement in another sub-protocol.
  *
  *   A content consumer will send a request for a content,
  *   during the request, the condition is checked. If the
- *   request transaction succeeded, delegators should encrypt
+ *   request transaction succeeded, delegatees should encrypt
  *   their secret shards with the consumer's public key and
  *   send via this protocol.
  *
@@ -49,7 +49,7 @@ interface ICosmowayKeyDeliverProtocol {
         bytes shard
     );
 
-    /// @notice Upload encrypted file cid, secret shares, delegators, conditioner, and condition
+    /// @notice Upload encrypted file cid, secret shares, delegatees, conditioner, and condition
     function uploadKeyset(
         string memory cid,
         bytes[] memory secretShards,
@@ -61,7 +61,7 @@ interface ICosmowayKeyDeliverProtocol {
     /// @notice Report if a key is received by a node
     function receiveKey(
         uint keysetId,
-        uint delegatorId,
+        uint delegateeId,
         bool accept,
         string memory reason
     ) external;
@@ -76,7 +76,7 @@ interface ICosmowayKeyDeliverProtocol {
     /// @notice Submit a re-encrypted secret shard for an access request
     function submitRekey(
         uint accessId,
-        uint delegatorId,
+        uint delegateeId,
         bytes memory rekeyShard
     ) external;
 }
