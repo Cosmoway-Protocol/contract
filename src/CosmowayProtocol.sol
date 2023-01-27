@@ -38,7 +38,7 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
             Keyset(cid, secretShards, to, conditioner, condition, accepted)
         );
         for (uint i = 0; i < to.length; i++) {
-            emit KeysetUploaded(keysetId, to[i], secretShards[i]);
+            emit KeysetUploaded(keysetId, to[i], i, secretShards[i]);
         }
     }
 

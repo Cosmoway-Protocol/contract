@@ -27,12 +27,13 @@ import "./ICosmowayProtocolConditioner.sol";
 interface ICosmowayKeyDeliverProtocol {
     event KeysetUploaded(
         uint indexed keysetId,
-        address indexed delegator,
+        address indexed delegatee,
+        uint delegateeId,
         bytes shard
     );
     event KeysetReceived(
         uint indexed keysetId,
-        address indexed delegator,
+        address indexed delegatee,
         bool accept,
         string reason
     );
