@@ -41,10 +41,11 @@ interface ICosmowayKeyDeliverProtocol {
         uint indexed keysetId,
         address indexed requester,
         uint indexed accessId,
-        bytes32 pubKey
+        bytes pubKey
     );
     event RekeyUploaded(
         uint indexed accessId,
+        uint indexed delegateeId,
         address indexed requester,
         bytes shard
     );
@@ -70,7 +71,7 @@ interface ICosmowayKeyDeliverProtocol {
     function request(
         uint keysetId,
         bytes memory requestPayload,
-        bytes32 pubKey
+        bytes memory pubKey
     ) external returns (uint accessId);
 
     /// @notice Submit a re-encrypted secret shard for an access request

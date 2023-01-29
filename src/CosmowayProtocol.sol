@@ -17,7 +17,7 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
     struct AccessRequest {
         uint keysetId;
         address requester;
-        bytes32 pubKey;
+        bytes pubKey;
         bytes[] rekeyShards;
     }
 
@@ -58,7 +58,7 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
     function request(
         uint keysetId,
         bytes memory requestPayload,
-        bytes32 pubKey
+        bytes memory pubKey
     ) external override returns (uint accessId) {
         Keyset memory usingKeyset = keysets[keysetId];
         try
@@ -92,6 +92,6 @@ contract CosmowayProtocol is ICosmowayKeyDeliverProtocol {
             revert NotDelegatee();
 
         access.rekeyShards[delegateeId] = rekeyShard;
-        emit RekeyUploaded(accessId, access.requester, rekeyShard);
+        emit RekeyUploaded(accessId, delegateeId, access.requester, rekeyShard);
     }
 }
